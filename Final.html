@@ -1,0 +1,125 @@
+
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+        integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+        crossorigin=""/><script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+        integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+        crossorigin=""></script>    
+        <link rel="stylesheet" href="includes/css/Final.css">
+        <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+        <link rel="stylesheet" href="/resources/demos/style.css">
+        <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+        <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+        <title >Toyota Airlines </title>
+        <link rel="icon" href="includes/images/title_icon.ico" type="image/x-icon">
+    </head>
+<body>
+    <section>
+     <!-- Creating Nav Bar -->
+     <nav id="main-nav" class="navbar fixed-top navbar-expand-sm mb-1">
+        <div class="container">
+            <a class="navbar-brand" href="#">Air Toyota <img class="mb-1" src="includes/images/title_icon.ico" height="25" alt="..."> </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar-main">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbar-main">
+                <ul class="navbar-nav ms-auto">
+                    <li class="myCart nav-item" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBothOptions" aria-controls="offcanvasWithBothOptions">
+                    <i class="fas fa-shopping-cart"></i> My Cart
+                    </li>
+                </ul>
+            </div>
+        </div> 
+    </nav>
+    <!--This where all the cart-data will be going through javascript-->
+    <div class="offcanvas offcanvas-start" data-bs-scroll="true" tabindex="-1" id="offcanvasWithBothOptions" aria-labelledby="offcanvasWithBothOptionsLabel">
+        <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="offcanvasWithBothOptionsLabel"><i class="fas fa-shopping-cart"></i></h5>
+            <button type="button" class="btn-success btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body container-lg">
+            <div class="container-lg" id="cart-data">
+
+            </div>
+            <div id="clear-cart">
+
+            </div>
+        </div>
+    </div>
+    </section>
+    <!--This is where the map will be-->
+    <section class="map-section py-5">
+        <div class="container-lg">
+                <div id="map"></div>
+        </div>
+    </section>
+    <!--Displaying the results of the flights available-->
+    <section class="flight-reports py-5">
+        <div class="container-lg">
+            <div id="results">
+
+            </div>
+        </div>
+    </section>
+    <!-- Booking Modal-->
+    <div class="container-lg" id="myModal">
+        <div class="modal fade" id="checkout" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title text-dark" id="loginModalLabel">Booking</h5>
+                    </div>
+                    <div class="modal-body" id="checkout-body">
+                        <form>
+                            <div class="mb-3">
+                                <form>
+                                    <div class="mb-3">
+                                        <label for="FirstName" class="form-label">Company Name</label>
+                                        <input type="text" class="form-control" id="company-name" placeholder="">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="mail" class="form-label">Email address</label>
+                                        <input type="email" class="form-control" id="mail" placeholder="name@example.com">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="Age" class="form-label">Number Of Seats</label>
+                                        <input type="number" id="numOfSeats" class="form-control">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="zipCode" class="form-label">Zip</label>
+                                        <input type="text" class="form-control" id="zipCode" placeholder="">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="Number" class="form-label">Number</label>
+                                        <input type="text" id="Number" class="form-control rounded" placeholder="">
+                                    </div>
+                                    <hr>
+                                    <div id="errors"></div>
+                                </form>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" id="validator" class="btn btn-outline-success">Checkout</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+    <!-- Simple Footer -->
+    <footer class="text-center py-5">
+        &copy; 2023 Toyota Airlines. All rights reserved.
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    <script src="includes/Final.js"></script>
+</body>
+</html>
